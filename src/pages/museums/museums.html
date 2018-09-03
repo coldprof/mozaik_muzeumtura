@@ -1,0 +1,154 @@
+<ion-header style="height:60px; background-color: #be7b50;" >
+  <ion-navbar *ngIf="sr==''" color="foszin" >
+
+    <button ion-button icon-only menuToggle >
+          <ion-icon name="menu" color="light"></ion-icon>
+        </button>
+
+    <ion-title style="margin-top:3px;">Mozaik Múzeumtúra
+      <ion-icon  color="light" (click)="setSr('s')" style="float:right; padding-right:10px; margin-top:3px;" name="search" >
+      </ion-icon></ion-title>
+
+
+    <!--  -->
+  </ion-navbar>
+  <ion-navbar *ngIf="sr=='s'" color="foszin"  >
+      <ion-searchbar placeholder="Keresés" cancelButtonText="X" showCancelButton=true (ionInput)="getSrc($event)" (ionCancel)="setSr('')">
+
+      </ion-searchbar>
+</ion-navbar>
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+<div style="text-align:center; padding-top:10px; padding-bottom:2px; position: sticky; top:0px; z-index: 2000; background: #fff;">
+
+  <button ion-button small round outline color="primary" (click)="setFilt('')">
+
+    Abc
+  </button>
+  <button ion-button small round outline color="primary" (click)="setFilt('tema')">Téma</button>
+  <button ion-button small round outline color="primary" (click)="presentLoadingCity()"> Település</button>
+
+
+</div>
+
+
+<div *ngIf="filt=='tema'">
+  <div style="text-align:center; padding-top:16px; margin-top:1px; padding-bottom:20px;position: sticky; top:47px; z-index: 2000; background: #fff;" >
+
+      <img (click)="catModal(theme)" style="width:40px;" src="./assets/kategoriak/{{categories[theme].pic}}">
+
+<br>
+       <i>{{categories[theme].name}}</i><br>
+       <sub>(Klikk a képre a kategóriaváltáshoz)</sub>
+      </div>
+
+
+          <ion-item *ngFor="let museum of muzeums  | searchfilter: 'categories' : theme | orderBy:'name' " >
+
+          <button  ion-item (click)="musModal(museum)">
+
+                <ion-card no-padding>
+                    <img src="{{picURL}}{{museum.pict1}}"/>
+                    <ion-card-content>
+                      <ion-card-title style="white-space: normal;">
+                          <h2 style="width:100%;">
+                            <b  style="text-transform: uppercase;">{{museum.name}}</b>
+                        </h2>
+                        </ion-card-title>
+                      <p style="white-space: normal;">
+                          {{museum.city}}
+                      </p>
+                    </ion-card-content>
+                  </ion-card>
+          </button>
+        </ion-item>
+      </div>
+
+      <div *ngIf="filt=='telepules'">
+
+
+          <ion-item *ngFor="let cityz of cityList | orderBy:'city'">
+            <ion-list-header style="background-color: #be7b50; color:#fff;"  >
+              {{cityz.city}}
+            </ion-list-header>
+            <button (click)="musModal(museum)" ion-item *ngFor="let museum of cityz.museums | orderBy:'name'">
+                    <ion-card no-padding item-text-wrap>
+                      <img src="{{picURL}}{{museum.pict1}}"/>
+
+                      <ion-card-content>
+                        <ion-card-title style="white-space: normal;">
+                          <h2 style="width:100%;">
+                            <b  style="text-transform: uppercase;">{{museum.name}}</b>
+                          </h2>
+                          </ion-card-title>
+                        <p style="white-space: normal;" >
+                            {{museum.city}}
+                        </p>
+                      </ion-card-content>
+                    </ion-card>
+            </button>
+          </ion-item>
+        </div>
+        <div *ngIf="filt==''">
+          <ion-item  style="padding:0px; margin:0px;" *ngFor="let museum of scrollArray | orderBy:'name' " >
+
+              <button  ion-item (click)="musModal(museum)">
+
+                    <ion-card no-padding>
+                        <img src="{{picURL}}{{museum.pict1}}"/>
+
+                        <ion-card-content>
+                          <ion-card-title style="white-space: normal;">
+                              <h2 style="width:100%;">
+                                <b  style="text-transform: uppercase;">{{museum.name}}</b>
+                            </h2>
+                            </ion-card-title>
+                          <p style="white-space: normal;">
+                              {{museum.city}}
+                          </p>
+                        </ion-card-content>
+                      </ion-card>
+              </button>
+            </ion-item>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+              <ion-infinite-scroll-content loadingSpinner="bubbles"
+              loadingText="Adatok betöltése..."></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
+      </div>
+
+
+      <div *ngIf="filt=='searc'">
+        <ion-item  style="padding:0px; margin:0px;" *ngFor="let museum of items | orderBy:'name' " >
+
+            <button  ion-item (click)="musModal(museum)">
+
+                  <ion-card no-padding>
+                      <img src="{{picURL}}{{museum.pict1}}"/>
+
+                      <ion-card-content>
+                        <ion-card-title style="white-space: normal;">
+                            <h2 style="width:100%;">
+                              <b  style="text-transform: uppercase;">{{museum.name}}</b>
+                          </h2>
+                          </ion-card-title>
+                        <p style="white-space: normal;">
+                            {{museum.city}}
+                        </p>
+                      </ion-card-content>
+                    </ion-card>
+            </button>
+          </ion-item>
+
+
+    </div>
+
+
+
+</ion-content>

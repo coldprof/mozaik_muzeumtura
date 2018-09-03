@@ -1,0 +1,110 @@
+<ion-header style="height:60px; background-color: #be7b50;" >
+  <ion-navbar  color="foszin">
+      <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"  color="light"></ion-icon>
+        </button>
+    <ion-title>Mozaik Múzeumtúra</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content  no-padding style="background-color: none; height:100%">
+
+  <div *ngIf="matricaNum <= 12" style="background-color: #b1781f; padding:10px; padding-top:20px; margin-top:10px; width:100%; text-align:center;">
+
+    <img style="width:15%;" *ngFor="let dummy of ' '.repeat(aktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_aktiv.png">
+    <img style="width:15%;" *ngFor="let dummy of ' '.repeat(inaktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_inaktiv.png">
+    <div block style="margin-top:5px;">  <img *ngIf="matricaNum == 12" style="width:15%;" src="./assets/jatek/serleg_bronz.png"></div>
+    <div style="color:#fff; text-align:center;" >
+        <b><i> {{matricaNum}}/12</i> </b>
+        <button ion-button round style="position:absolute; right:20px;"  color="light" (click)="scanData()">
+          <ion-icon name="camera" (click)="scanData()" style="zoom:2.0;" ></ion-icon>
+
+      </button>
+      </div>
+
+
+  </div>
+    <div *ngIf="matricaNum > 12 && matricaNum <= 24" style="background-color: #b6b0b0;  padding:10px; padding-top:20px; margin-top:10px; width:100%; text-align:center;">
+
+          <img style="width:15%;" *ngFor="let dummy of ' '.repeat(aktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_aktiv.png">
+          <img style="width:15%;" *ngFor="let dummy of ' '.repeat(inaktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_inaktiv.png">
+          <div block style="margin-top:5px;"> <img  style="width:15%;" src="./assets/jatek/serleg_bronz.png"> <img *ngIf="matricaNum == 24" style="width:15%;" src="./assets/jatek/serleg_ezust.png"></div>
+          <div style="color:#fff; text-align:center;" >
+
+              <b> <i>{{matricaNum}}/24</i> </b>
+              <button ion-button round style="position:absolute; right:20px;"  color="light" (click)="scanData()">
+                <ion-icon name="camera" (click)="scanData()" style="zoom:2.0;" ></ion-icon>
+
+            </button>
+            </div>
+
+
+        </div>
+    <div *ngIf="matricaNum > 24" style="background-color: #b1a11f; padding:10px; margin-top:10px; padding-top:20px; width:100%; text-align:center;">
+
+      <img style="width:15%;" *ngFor="let dummy of ' '.repeat(aktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_aktiv.png">
+      <img style="width:15%;" *ngFor="let dummy of ' '.repeat(inaktiv).split(''), let x = index"  src="./assets/jatek/jatek_ikon_inaktiv.png">
+      <div block style="margin-top:5px;">  <img  style="width:15%;" src="./assets/jatek/serleg_bronz.png">  <img  style="width:15%;" src="./assets/jatek/serleg_ezust.png"> <img *ngIf="matricaNum == 36" style="width:15%;" src="./assets/jatek/serleg_arany.png"></div>
+      <div style="color:#fff;" >
+          <b><i>{{matricaNum}}/36 </i></b>
+          <button ion-button round style="position:absolute; right:20px;"  color="light" (click)="scanData()">
+            <ion-icon name="camera" (click)="scanData()" style="zoom:2.0;" ></ion-icon>
+
+        </button>
+        </div>
+          </div>
+         <!--idejönmég  *ngIf="uid<1" -->
+<!-- <div *ngIf="bekuldes > 0" [(ngModel)]="bekuldes" >
+            <button ion-button>Beküldés</button>
+          </div> -->
+          <ion-buttons  text-center style="margin-top:20px; margin-bottom:20px;">
+      <button  *ngIf="uid == 0" ion-button color="primary" (click)="userLoginModal()">
+          Belépés
+      </button>
+      <button  *ngIf="uid == 0"  ion-button color="primary" (click)="openReg()">
+        Regisztráció
+    </button>
+
+
+<!--    Próba: {{proba}} -->
+        <ion-grid *ngIf="waiters != 0" style="padding:0px; border-bottom:1px solid #be7b50; border-top:1px solid #be7b50; color:#333; margin:0px;  width:100%;">
+            <ion-row style="padding:10px;">
+              <ion-col style="color:#be7b50; position:relative; top:12px;" >
+                Jóváírásra váró matricáid: {{waiters}}
+              </ion-col>
+              <ion-col text-right>
+                  <button ion-button color="foszin" (click)="uploadWaiting()">
+                      <ion-icon name="cloud-upload" color="light"> </ion-icon> Beküldés
+                  </button>
+
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+
+      <!--  <ion-list  *ngFor="let wait of waitingStickers" >
+         <p>{{wait.timestamp}}</p>
+       </ion-list> -->
+
+
+    <div *ngIf="uid == 0" ><p style="color:#be7b50; text-align:center; padding:10px;">Tarts velünk és fedezd fel Magyarország
+    sokszínű kulturális kínálatát egy élményekben gazdag játék keretében!<br>
+  Keresd a múzeumokban a Mozaik Múzeumtúra Információs Táblát és az alkalmazás segítségével olvasd be a táblán található egyedi QR-kódot.</p></div>
+
+
+
+  </ion-buttons>
+
+
+
+<div style="padding:10px;" *ngIf="uid != 0">
+  <b style="color:#be7b50; padding:10px; margin-bottom:10px;">Meglátogatott múzeumok:</b>
+
+</div>
+      <ion-list  *ngFor="let stic of localStickers" >
+        <img  src="./assets/matrica/{{stic.mid}}.jpg"><br><sub style="padding-left:10px;">{{stic.timestamp}}</sub>
+
+      </ion-list>
+
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header style="height:60px; background-color: #be7b50;" >
+  <ion-navbar  color="foszin">
+    <button ion-button icon-only menuToggle >
+          <ion-icon name="menu" color="light"></ion-icon>
+        </button>
+    <ion-title>Mozaik Múzeumtúra</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+<ion-item style="padding:0px; margin:0px;" *ngFor="let hir of news">
+  <button  ion-item item-text-wrap (click)="newsModal(hir)" >
+    <ion-card no-padding item-text-wrap >
+
+      <img *ngIf="conntype!='none'" src="{{hir.kep}}"/>
+      <img *ngIf="conntype=='none'" src="./assets/mozaik_belepes.jpg"/>
+
+        <ion-card-content >
+          <ion-card-title style="white-space: normal;" >
+            <h2 style="width:100%; word-wrap: normal;">
+              <b  style="text-transform: uppercase;">
+                {{hir.cim}}</b>
+            </h2>
+            </ion-card-title>
+          <p style="white-space: normal;" innerHTML="{{hir.introtext | truncate : 250}}">
+
+          </p>
+          <button  style="float:right; margin-right:30px; margin-bottom:10px;" ion-button small (click)="newsModal(hir)">Bővebben</button>
+        </ion-card-content>
+      </ion-card>
+
+</button>
+</ion-item>
+<div style="text-align:center; margin-top:10px;">
+<button ion-button (click)="openMMT()"><!-- <ion-icon name="globe" item-start color="light"> </ion-icon> --> További hírek</button></div>
+</ion-content>

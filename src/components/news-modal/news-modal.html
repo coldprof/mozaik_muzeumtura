@@ -1,0 +1,14 @@
+
+<ion-content  >
+      <img *ngIf="conntype!='none'" src="{{news.kep}}"/>
+      <img *ngIf="conntype=='none'" src="./assets/mozaik_belepes.jpg"/>
+      <div style="padding:10px;">
+      <h3 style="width:100%; word-wrap: normal;">
+
+          {{news.cim}}
+      </h3>
+      <sub>{{news.created}}</sub>
+      <p innerHTML="{{news.introtext}}"></p>
+      <p innerHTML="{{news.fulltext}}"></p>
+    </div>
+    </ion-content>

@@ -1,0 +1,31 @@
+<ion-header >
+    <ion-navbar  color="foszin">
+      <ion-title text-center>Bejelentkezés</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding text-center style="background-color: #be7b50;">
+    <img style=" padding-top:20px; padding-bottom:20px;" src="./assets/imgs/logo167.png">
+    <form (ngSubmit)="logForm()">
+    <ion-list>
+
+        <ion-item style="margin:4px; border-radius:5px; ">
+          <ion-label floating>Felhasználónév</ion-label>
+          <ion-input type="text" [(ngModel)]="user.username" name="username"></ion-input>
+        </ion-item>
+
+        <ion-item style="margin:4px; border-radius:5px;">
+          <ion-label floating>Jelszó</ion-label>
+          <ion-input type="password" [(ngModel)]="user.pass" name="pass" ></ion-input>
+        </ion-item>
+        <div padding>
+            <button ion-button block color="light"><p style="color:#be7b50;">Belépés</p></button>
+          </div>
+
+
+      </ion-list>
+    </form>
+    <button ion-button color="light" (click)="openForgot()">
+      <p style="color:#be7b50;"> Elfelejtett jelszó</p>
+  </button>
+
+  </ion-content>

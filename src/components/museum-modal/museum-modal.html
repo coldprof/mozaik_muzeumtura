@@ -1,0 +1,109 @@
+<!-- Generated template for the MuseumModalComponent component -->
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+        {{museum.name}}
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-buttons start>
+    <button (click)="dismiss()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-header> -->
+<ion-content >
+    <button large color="primary" (click)="dismiss()" style="position:absolute; top:30px; left: 10px; z-index:1000; background: none; ">
+        <ion-icon name="arrow-back" color="light"></ion-icon>
+      </button>
+
+    <img style="width:100%;  "  src="{{picURL}}{{museum.pict1}}"/>
+<div >
+    <h3 style="color:#333; padding:20px; padding-top:10px; padding-bottom:10px;">
+  {{museum.name}}
+
+</h3>
+<h4 style="color:#fff; padding-right:50px; margin:0px; height:35px; background-color: #be7b50; width:100%; text-align:right; padding-top:4px; ">
+    {{museum.city}}
+  </h4>
+
+  <div *ngIf="text">
+      <div *ngIf="text.length <= limit">{{text}}</div>
+      <div *ngIf="truncating && text.length > limit">
+        <div class="desc" innerHTML="{{museum.description | truncate : 350}}">
+
+      </div>
+        <button  style="float:right; margin-right:30px;" ion-button light  (click)="truncating = false">Bővebben</button>
+      </div>
+      <div *ngIf="!truncating && text.length > limit">
+          <div class="desc"  innerHTML="{{museum.description | truncate : 40000}}">
+
+        </div>
+        <button style="float:right; margin-right:30px;" ion-button light  (click)="truncating = true">Kevesebbet</button>
+      </div>
+      </div>
+      <div style="color:#fff; display:block; float:left; width:100%; padding:10px; background-color: #be7b50; border:2px dashed #fff; margin-top:5px; margin-bottom:5px; border-radius:10px; color:#333">
+
+
+        <p style="text-align:center; "> <ion-icon color="light" style="zoom:2.0;" name="locate"></ion-icon></p>
+
+        <p style="text-align:center; color:#fff;">Múzeum távolsága a jelenlegi pozíciódhoz képest:</p>
+        <p *ngIf="dist=='z'" style="text-align:center; color:#fff;"><ion-spinner name="bubbles" style="color:#fff"></ion-spinner></p>
+        <p   *ngIf="dist!='z'" style="text-align:center; font-weight:bold; color:#fff;"> {{dist}}<br>
+           <span style="font-size:14px; font-weight:normal; color:#fff;">{{km}}</span></p></div>
+      <ion-grid style="padding:0px; color:#333; margin:0px;  width:100%;">
+          <ion-row style="padding:10px;">
+            <ion-col style="color:#be7b50;" >
+                {{museum.postcode}} {{museum.city}}, {{museum.street}}
+            </ion-col>
+            <ion-col text-right>
+                <ion-icon name="pin"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+          <ion-row style="background-color: #be7b50; padding:10px;">
+              <ion-col style="color:#fff;">
+                  {{museum.phone}}
+              </ion-col>
+              <ion-col text-right>
+                  <ion-icon color="light" name="call"></ion-icon>
+              </ion-col>
+            </ion-row>
+
+            <ion-row style="padding:10px;">
+                <ion-col style="color:#be7b50;">
+                    {{museum.web}}
+                </ion-col>
+                <ion-col text-right>
+                    <ion-icon name="globe"></ion-icon>
+                </ion-col>
+              </ion-row>
+
+
+              <ion-row style="background-color: #be7b50; padding:10px;">
+                  <ion-col style="color:#fff;">
+                      {{museum.email}}
+                  </ion-col>
+                  <ion-col text-right>
+                      <ion-icon name="mail"  color="light"></ion-icon>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="museum.fb!=''" style="padding:10px;">
+                    <ion-col style="color:#be7b50;">
+                        {{museum.fb}}
+                    </ion-col>
+                    <ion-col text-right>
+                        <ion-icon name="contacts"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+        </ion-grid>
+        <div class="desc"><b>Nyitvatartás:</b><p innerHTML="{{museum.opening}}"></p></div>
+        <!-- {{gMap}} -->
+       <!--  <div style="width:100%; height:100px;" innerHTML="<iframe src = '{{gMap}}'></iframe>"></div> -->
+       <img style="width:100%;  "  src="{{picURL}}{{museum.pict2}}"/>
+</div>
+
+
+</ion-content>
